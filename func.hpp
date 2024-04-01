@@ -15,13 +15,14 @@ class Account {
         void deposit(int money);
         void withdraw(int money);
         int getID();
-        string getString();
+        int getBalance();
+        string getName();
 };
 
 class TransactionHandler {
     public:
         TransactionHandler();
-        void transfer();
+        void transfer(int amount, Account *sender, Account *receiver);
 };
 
 #endif /* FUNC_HPP */

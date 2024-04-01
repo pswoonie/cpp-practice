@@ -29,4 +29,12 @@ class FailedCreatingAccountException {
         void showErr();
 };
 
+class MoreThanOneDigitException {
+    private:
+        int len;
+    public:
+        MoreThanOneDigitException(int length);
+        void showErr();
+};
+
 #endif /* EXCEPTIONS_HPP */

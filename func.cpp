@@ -7,26 +7,26 @@ Account::Account(int iParam, int bParam, string nParam)
 {
     cout<<"id      : "<<id<<endl;
     cout<<"balance : "<<balance<<endl;
-    cout<<"name    : "<<name<<endl;
-    cout<<"Account Successfully Created"<<endl;
+    if (!name.compare("John Borne")) {
+        cout<<"name    : "<<name<<"  <- This Is You"<<endl;
+    } else {
+        cout<<"name    : "<<name<<endl;
+    }
+    cout<<"-- Account Successfully Created"<<endl;
 }
 
 void Account::deposit(int money) {
+    // cout<<"BEFORE: "<<balance<<" | ";
     balance+=money;
-    cout<<"Current Balance: "<<balance<<endl;
+    // cout<<"Current Balance: "<<balance<<endl;
 }
 
 void Account::withdraw(int money) {
-    try {
-        if (money > balance) {
-            throw NotEnoughBalanceException(balance);
-            return;
-        } else {
-            balance-=money;
-            cout<<"Current Balance: "<<balance<<endl;
-        }
-    } catch(NotEnoughBalanceException e) {
-        e.showErr();
+    if (money > balance) {
+        throw NotEnoughBalanceException(balance);
+    } else {
+        balance-=money;
+        // cout<<"Current Balance: "<<balance<<endl;
     }
 }
 
@@ -34,14 +34,19 @@ int Account::getID() {
     return id;
 }
 
-string Account::getString() {
+int Account::getBalance() {
+    return balance;
+}
+
+string Account::getName() {
     return name;
 }
 
 TransactionHandler::TransactionHandler(){
-    cout<<"Ready To Make Transaction"<<endl;
+    cout<<"-- Please Wait For Transaction To Finish"<<endl;
 }
 
-void TransactionHandler::transfer() {
-    cout<<""<<endl;
+void TransactionHandler::transfer(int amount, Account *sender, Account *receiver) {
+    sender->withdraw(amount);
+    receiver->deposit(amount);
 }
